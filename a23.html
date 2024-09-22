@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO ANU</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body, html {
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
+            position: relative; /* For positioning elements */
+        }
+        body {
+            background: #252839;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the GIF covers the entire area */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Send the GIF to the back */
+        }
+        #typing-text {
+            position: absolute;
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            z-index: 10; /* Ensure text is above the GIF */
+            border-right: 2px solid black; /* Cursor effect */
+            white-space: nowrap; /* Prevents wrapping */
+            overflow: hidden; /* Hides overflow */
+            display: inline-block; /* Makes it behave like an inline element */
+        }
+        #auto-text {
+            position: absolute;
+            right: 20px; /* Align on the right side */
+            top: 80px; /* Adjust position as needed */
+            z-index: 10; /* Ensure text is above the GIF */
+            font-size: 1.5em; /* Adjust the font size */
+            white-space: pre-line; /* Allow line breaks */
+            text-align: left; /* Align text to the left */
+            color: #03b9f9; /* Set text color to #03b9f9 */
+        }
+        ul {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            z-index: 10; /* Ensure menu is above the GIF */
+            margin-top: 100px; /* Adjust margin to fit the design */
+        }
+        ul li {
+            position: relative;
+            list-style: none;
+        }
+        ul li a {
+            position: relative;
+            font-size: 2.4em; /* Decrease size to 60% of original 4em */
+            text-decoration: none;
+            line-height: 1em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+        }
+        ul li a::before {
+            content: attr(data-text);
+            position: absolute;
+            color: #fff;
+            width: 100%; /* Change this to 100% */
+            overflow: hidden;
+            transition: 1s;
+            border-right: 8px solid var(--clr);
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        ul li a:hover::before {
+            width: 100%;
+            filter: drop-shadow(0 0 25px var(--clr));
+        }
+    </style>
+</head>
+<body>
+    <img src="https://media.giphy.com/media/55PkuDHvG7u36/giphy.gif?cid=790b76111o3y6tb3i0vcf7duoo4mqild3s41jx3h19xyfarw&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Full Screen GIF" />
+    
+    <h1 id="typing-text">23 SEPTEMBER 2024</h1>
+    <div id="auto-text"></div>
+    <ul>
+        <li style="--clr:#00ade1">
+            <a href="#" data-text="&nbsp;HAPPY BIRTHDAY ANU">&nbsp;HAPPY BIRTHDAY ANU&nbsp;</a>
+        </li>
+    </ul>
+
+    <script>
+        // Auto-typing effect for the right side text
+        const autoTexts = [
+            "You are like a butterfly",
+            "who can’t see her beautiful colors",
+            "You are one of the strong, sweet,",
+            "beautiful women I know",
+            "From today, may your happiness",
+            "increase day by day."
+        ];
+        let autoIndex = 0;
+        let charIndex = 0;
+
+        function typeText() {
+            if (autoIndex < autoTexts.length) {
+                const currentText = autoTexts[autoIndex];
+                if (charIndex < currentText.length) {
+                    document.getElementById("auto-text").innerHTML += currentText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeText, 100); // Adjust typing speed here
+                } else {
+                    // Move to the next text after a short delay
+                    setTimeout(() => {
+                        autoIndex++;
+                        charIndex = 0; // Reset character index
+                        document.getElementById("auto-text").innerHTML += "<br>"; // New line
+                        typeText();
+                    }, 1000); // Pause before typing the next text
+                }
+            }
+        }
+
+        typeText();
+    </script>
+</body>
+</html>
